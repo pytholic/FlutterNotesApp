@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 //import 'package:notes_app/db/notes_database.dart';
 import 'package:notes_app/model/note.dart';
 import 'package:notes_app/widget/note_form_widget.dart';
+import 'package:notes_app/pages/main_page.dart';
+
+// var _isDark = MainPageState().isDark;
+// Color color = _isDark ? Color(0xFF303030) : Color(0xFFf6f5ee);
+Colro color = Color(0xFF303030);
 
 class AddEditNotePage extends StatefulWidget {
   final Note? note;
@@ -39,7 +44,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
           child: Container(
             width: double.infinity,
             height: double.infinity,
-            color: Colors.grey[850],
+            color: color,
             child: NoteFormWidget(
               number: number,
               title: title,

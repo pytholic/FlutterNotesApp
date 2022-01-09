@@ -8,11 +8,8 @@ import 'package:notes_app/widget/note_form_widget.dart';
 import 'package:notes_app/pages/main_page.dart';
 
 var isDark = MainPageState().isDark;
-// create some values
-Color pickerColor = isDark ? Color(0xFF303030) : Color(0xFFf6f5ee);
-//Color currentColor = isDark ? Color(0xFF303030) : Color(0xFFf6f5ee);
-// Color pickerColor = Color(0xFF303030);
-// Color currentColor = Color(0xFF303030);
+
+Color pickerColor = Colors.pink.shade100;
 
 class NoteFormWidget extends StatefulWidget {
   final String title;
@@ -58,9 +55,9 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
               Padding(padding: EdgeInsets.only(top: 20.0)),
               buildTitle(),
               // Padding to add space between widgets, we can also use SizedBox
-              Padding(padding: EdgeInsets.only(top: 40.0)),
+              Padding(padding: EdgeInsets.only(top: 30.0)),
               buildDescription(),
-              Padding(padding: EdgeInsets.only(top: 40.0)),
+              Padding(padding: EdgeInsets.only(top: 30.0)),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 24),
@@ -120,7 +117,7 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
             Padding(padding: EdgeInsets.only(left: 10.0)),
             Expanded(
               child: TextFormField(
-                maxLines: 5,
+                maxLines: 7,
                 initialValue: description,
                 style: GoogleFonts.shadowsIntoLight(
                     fontSize: 22,

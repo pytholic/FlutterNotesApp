@@ -9,3 +9,4 @@
     * Fix design of **Add Note** page. Use `padding` to add space between *title* and *description` boxes.
     * Wrapped *title* and *description* fields in `Row()` to add `padding` on the left side.
     * Selecting font style for *title* and *description* text.
+    * need to configure add notes page *background color* with `isDark` variable from `main_page.dart`
