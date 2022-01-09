@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:notes_app/model/note.dart';
 import 'package:notes_app/widget/note_form_widget.dart';
 import 'package:notes_app/pages/main_page.dart';
@@ -49,18 +52,15 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
   Widget build(BuildContext context) => SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(16),
-          // child: Container(
-          //   //color: Colors.grey[850], //currentColor,
-          //   width: double.infinity,
-          //   height: double.infinity,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              Padding(padding: EdgeInsets.only(top: 20.0)),
               buildTitle(),
-              SizedBox(height: 10),
+              // Padding to add space between widgets, we can also use SizedBox
+              Padding(padding: EdgeInsets.only(top: 40.0)),
               buildDescription(),
-              SizedBox(height: 24),
-              //SizedBox(height: 24),
+              Padding(padding: EdgeInsets.only(top: 40.0)),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 24),
@@ -77,42 +77,70 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
       );
 
   Widget buildTitle() => Material(
+        borderRadius: BorderRadius.circular(10),
         color: pickerColor,
-        child: TextFormField(
-          maxLines: 1,
-          initialValue: title,
-          style: TextStyle(
-            color: Colors.white70,
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
-          ),
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: 'Title',
-            hintStyle: TextStyle(color: Colors.white70),
-          ),
-          validator: (title) => title != null && title.isEmpty
-              ? 'The title cannot be empty'
-              : null,
-          onChanged: (pass) {}, //onChangedTitle,
+        // Wrap inside Row to add Padding on the left side
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(padding: EdgeInsets.only(left: 10.0)),
+            Expanded(
+              child: TextFormField(
+                inputFormatters: [UpperCaseTextFormatter()],
+                maxLines: 1,
+                initialValue: title.toUpperCase(),
+                style: GoogleFonts.permanentMarker(
+                    fontSize: 28,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.grey[700]),
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Title'.toUpperCase(),
+                  hintStyle: GoogleFonts.permanentMarker(
+                      fontSize: 28,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.grey[500]),
+                ),
+                validator: (title) => title != null && title.isEmpty
+                    ? 'The title cannot be empty'
+                    : null,
+                onChanged: (pass) {}, //onChangedTitle,
+              ),
+            ),
+          ],
         ),
       );
 
   Widget buildDescription() => Material(
+        borderRadius: BorderRadius.circular(10),
         color: pickerColor,
-        child: TextFormField(
-          maxLines: 5,
-          initialValue: description,
-          style: TextStyle(color: Colors.white60, fontSize: 18),
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: 'Type something...',
-            hintStyle: TextStyle(color: Colors.white60),
-          ),
-          validator: (title) => title != null && title.isEmpty
-              ? 'The description cannot be empty'
-              : null,
-          onChanged: (pass) {}, //onChangedDescription,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(padding: EdgeInsets.only(left: 10.0)),
+            Expanded(
+              child: TextFormField(
+                maxLines: 5,
+                initialValue: description,
+                style: GoogleFonts.shadowsIntoLight(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[700]),
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Type something...',
+                  hintStyle: GoogleFonts.shadowsIntoLight(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[500]),
+                ),
+                validator: (title) => title != null && title.isEmpty
+                    ? 'The description cannot be empty'
+                    : null,
+                onChanged: (pass) {}, //onChangedDescription,
+              ),
+            ),
+          ],
         ),
       );
 
@@ -128,7 +156,7 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              buildColorPicker(),
+              buildColorPickerBlock(),
               TextButton(
                 child: Text('SELECT', style: TextStyle(fontSize: 20)),
                 onPressed: () => Navigator.of(context).pop(),
@@ -138,8 +166,25 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
         ),
       );
 
-  Widget buildColorPicker() => ColorPicker(
+  Widget buildColorPickerRGB() => ColorPicker(
+        pickerColor: pickerColor,
+        enableAlpha: false, // hides alpha channel slider
+        labelTypes: [], // hides extra text in color picker like rgb values
+        onColorChanged: (color) => setState(() => pickerColor = color),
+      );
+
+  Widget buildColorPickerBlock() => BlockPicker(
         pickerColor: pickerColor,
         onColorChanged: (color) => setState(() => pickerColor = color),
+        availableColors: [
+          Colors.pink.shade100,
+          Colors.orangeAccent.shade100,
+          Colors.lime.shade300,
+          Colors.green.shade200,
+          Colors.blue.shade200,
+          Colors.indigo.shade100,
+          Colors.deepPurple.shade100,
+          Colors.blueGrey.shade100,
+        ],
       );
 }
