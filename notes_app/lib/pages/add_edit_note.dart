@@ -37,6 +37,8 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
         body: Form(
           key: _formKey,
           child: Container(
+            width: double.infinity,
+            height: double.infinity,
             color: Colors.grey[850],
             child: NoteFormWidget(
               number: number,
