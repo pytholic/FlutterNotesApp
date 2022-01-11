@@ -4,19 +4,17 @@ import 'package:notes_app/model/note.dart';
 import 'package:notes_app/widget/note_form_widget.dart';
 import 'package:notes_app/pages/main_page.dart';
 
-// var _isDark = MainPageState().isDark;
-// Color color = _isDark ? Color(0xFF303030) : Color(0xFFf6f5ee);
-Colro color = Color(0xFF303030);
-
 class AddEditNotePage extends StatefulWidget {
   final Note? note;
+  bool isDark;
 
-  const AddEditNotePage({
+  AddEditNotePage({
     Key? key,
     this.note,
+    required this.isDark,
   }) : super(key: key);
   @override
-  _AddEditNotePageState createState() => _AddEditNotePageState();
+  _AddEditNotePageState createState() => _AddEditNotePageState(this.isDark);
 }
 
 class _AddEditNotePageState extends State<AddEditNotePage> {
@@ -24,6 +22,9 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
   late int number;
   late String title;
   late String description;
+  bool isDark;
+
+  _AddEditNotePageState(this.isDark);
 
   @override
   void initState() {
@@ -32,6 +33,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
     number = widget.note?.number ?? 0;
     title = widget.note?.title ?? '';
     description = widget.note?.description ?? '';
+    isDark = isDark;
   }
 
   @override
@@ -44,7 +46,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
           child: Container(
             width: double.infinity,
             height: double.infinity,
-            color: color,
+            color: isDark ? Color(0xFF303030) : Color(0xFFf6f5ee),
             child: NoteFormWidget(
               number: number,
               title: title,

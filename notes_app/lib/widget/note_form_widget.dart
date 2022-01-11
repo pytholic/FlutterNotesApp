@@ -1,13 +1,11 @@
 import 'dart:ui';
-
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:notes_app/model/note.dart';
 import 'package:notes_app/widget/note_form_widget.dart';
 import 'package:notes_app/pages/main_page.dart';
-
-var isDark = MainPageState().isDark;
 
 Color pickerColor = Colors.pink.shade100;
 
@@ -86,15 +84,15 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
                 inputFormatters: [UpperCaseTextFormatter()],
                 maxLines: 1,
                 initialValue: title.toUpperCase(),
-                style: GoogleFonts.permanentMarker(
-                    fontSize: 28,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.grey[700]),
+                style: GoogleFonts.justAnotherHand(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[800]),
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Title'.toUpperCase(),
-                  hintStyle: GoogleFonts.permanentMarker(
-                      fontSize: 28,
+                  hintStyle: GoogleFonts.justAnotherHand(
+                      fontSize: 32,
                       fontWeight: FontWeight.normal,
                       color: Colors.grey[500]),
                 ),
@@ -117,17 +115,17 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
             Padding(padding: EdgeInsets.only(left: 10.0)),
             Expanded(
               child: TextFormField(
-                maxLines: 7,
+                maxLines: 5,
                 initialValue: description,
-                style: GoogleFonts.shadowsIntoLight(
-                    fontSize: 22,
+                style: GoogleFonts.shadowsIntoLightTwo(
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Colors.grey[700]),
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Type something...',
-                  hintStyle: GoogleFonts.shadowsIntoLight(
-                      fontSize: 22,
+                  hintStyle: GoogleFonts.shadowsIntoLightTwo(
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.grey[500]),
                 ),

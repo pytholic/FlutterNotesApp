@@ -65,7 +65,8 @@ class MainPageState extends State<MainPage> {
             ),
             onPressed: () async {
               await Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => AddEditNotePage()),
+                MaterialPageRoute(
+                    builder: (context) => AddEditNotePage(isDark: isDark)),
               );
             },
             child: Icon(Icons.add),
