@@ -1,6 +1,7 @@
 // class NotesFields {
 //   static const List<String> values = [title, description];
 // }
+import 'package:flutter/material.dart';
 
 class Note {
   final int? id;

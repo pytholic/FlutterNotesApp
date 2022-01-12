@@ -2,26 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Color pickerColor = Colors.pink.shade100;
+//Color pickerColor = Colors.pink.shade100;
 
 class NoteFormWidget extends StatefulWidget {
   final String title;
   final String description;
   final int? number;
+  Color noteColor;
+  final ValueChanged<Color> onChangedColor;
   //final ValueChanged<String> onChangedTitle;
   //final ValueChanged<String> onChangedDescription;
 
-  const NoteFormWidget({
+  NoteFormWidget({
     Key? key,
     this.title = '',
     this.description = '',
     this.number = 0,
+    required this.noteColor,
+    required this.onChangedColor,
     //required this.onChangedTitle,
     //required this.onChangedDescription,
   }) : super(key: key);
 
   @override
-  _NoteFormWidgetState createState() => _NoteFormWidgetState();
+  _NoteFormWidgetState createState() =>
+      _NoteFormWidgetState(noteColor, onChangedColor);
 }
 
 class _NoteFormWidgetState extends State<NoteFormWidget> {
@@ -29,6 +34,10 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
   late String title;
   late String description;
   late int number;
+  late Color noteColor;
+  late ValueChanged<Color> onChangedColor;
+
+  _NoteFormWidgetState(this.noteColor, this.onChangedColor);
 
   @override
   void initState() {
@@ -36,6 +45,7 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
     number = 0;
     title = '';
     description = '';
+    //noteColor = noteColor;
   }
 
   @override
@@ -46,10 +56,10 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Padding(padding: EdgeInsets.only(top: 20.0)),
-              buildTitle(),
+              buildTitle(noteColor),
               // Padding to add space between widgets, we can also use SizedBox
               Padding(padding: EdgeInsets.only(top: 30.0)),
-              buildDescription(),
+              buildDescription(noteColor),
               // Padding(padding: EdgeInsets.only(top: 30.0)),
               // ElevatedButton(
               //   style: ElevatedButton.styleFrom(
@@ -66,9 +76,9 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
         ),
       );
 
-  Widget buildTitle() => Material(
+  Widget buildTitle(Color color) => Material(
         borderRadius: BorderRadius.circular(10),
-        color: pickerColor,
+        color: color,
         // Wrap inside Row to add Padding on the left side
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -101,9 +111,9 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
         ),
       );
 
-  Widget buildDescription() => Material(
+  Widget buildDescription(Color color) => Material(
         borderRadius: BorderRadius.circular(10),
-        color: pickerColor,
+        color: color,
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -134,47 +144,43 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
         ),
       );
 
-  // ValueChanged<Color> callback
-  void changeColor(Color color) {
-    setState(() => color = color);
-  }
+  // void pickColor(BuildContext context) => showDialog(
+  //       context: context,
+  //       builder: (context) => AlertDialog(
+  //         title: Text('Pick your color!'),
+  //         content: Column(
+  //           mainAxisSize: MainAxisSize.min,
+  //           children: [
+  //             buildColorPickerBlock(),
+  //             TextButton(
+  //               child: Text('SELECT', style: TextStyle(fontSize: 20)),
+  //               onPressed: () => Navigator.of(context).pop(),
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //     );
 
-  void pickColor(BuildContext context) => showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text('Pick your color!'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              buildColorPickerBlock(),
-              TextButton(
-                child: Text('SELECT', style: TextStyle(fontSize: 20)),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ],
-          ),
-        ),
-      );
+  // Widget buildColorPickerRGB() => ColorPicker(
+  //       pickerColor: pickerColor,
+  //       enableAlpha: false, // hides alpha channel slider
+  //       labelTypes: [], // hides extra text in color picker like rgb values
+  //       onColorChanged: (color) => setState(() => pickerColor = color),
+  //     );
 
-  Widget buildColorPickerRGB() => ColorPicker(
-        pickerColor: pickerColor,
-        enableAlpha: false, // hides alpha channel slider
-        labelTypes: [], // hides extra text in color picker like rgb values
-        onColorChanged: (color) => setState(() => pickerColor = color),
-      );
-
-  Widget buildColorPickerBlock() => BlockPicker(
-        pickerColor: pickerColor,
-        onColorChanged: (color) => setState(() => pickerColor = color),
-        availableColors: [
-          Colors.pink.shade100,
-          Colors.orangeAccent.shade100,
-          Colors.lime.shade300,
-          Colors.green.shade200,
-          Colors.blue.shade200,
-          Colors.indigo.shade100,
-          Colors.deepPurple.shade100,
-          Colors.blueGrey.shade100,
-        ],
-      );
+  // Widget buildColorPickerBlock() => BlockPicker(
+  //       pickerColor: pickerColor,
+  //       onColorChanged: (color) => setState(() => pickerColor = color),
+  //       availableColors: [
+  //         Colors.yellow.shade100,
+  //         Colors.pink.shade100,
+  //         Colors.orangeAccent.shade100,
+  //         Colors.lime.shade300,
+  //         Colors.green.shade200,
+  //         Colors.blue.shade200,
+  //         Colors.indigo.shade100,
+  //         Colors.deepPurple.shade100,
+  //         Colors.blueGrey.shade100,
+  //       ],
+  //     );
 }

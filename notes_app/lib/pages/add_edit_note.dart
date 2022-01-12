@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:notes_app/model/note.dart';
 import 'package:notes_app/widget/note_form_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class AddEditNotePage extends StatefulWidget {
   final Note? note;
-  bool isDark;
-  ThemeData lightTheme;
-  ThemeData darkTheme;
+  final bool isDark;
+  final ThemeData lightTheme;
+  final ThemeData darkTheme;
 
-  AddEditNotePage({
+  const AddEditNotePage({
     Key? key,
     this.note,
     required this.isDark,
@@ -27,6 +28,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
   late int number;
   late String title;
   late String description;
+  late Color pickerColor;
   bool isDark;
   ThemeData lightTheme;
   ThemeData darkTheme;
@@ -41,6 +43,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
     title = widget.note?.title ?? '';
     description = widget.note?.description ?? '';
     isDark = isDark;
+    pickerColor = Colors.yellow.shade100;
   }
 
   @override
@@ -60,10 +63,11 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
             Transform.scale(
               scale: 2,
               child: IconButton(
-                onPressed: () {},
+                onPressed: () => pickColor(context),
                 //icon: Icon(Icons.color_lens),
                 icon: Image.asset('./assets/icons/color_picker_icon.png'),
                 color: isDark ? Colors.grey[850] : Colors.white,
+                splashRadius: 15,
               ),
             ),
           ],
@@ -79,21 +83,23 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
             color: isDark ? Color(0xFF303030) : Color(0xFFf6f5ee),
             child: Column(
               children: [
-                NoteFormWidget(
-                  number: number,
-                  title: title,
-                  description: description,
-                  // onChangedNumber: (number) => setState(() => this.number = number),
-                  // onChangedTitle: (title) => setState(() => this.title = title),
-                  // onChangedDescription: (description) =>
-                  //     setState(() => this.description = description),
-                ),
+                buildNoteWidget(context),
                 buildButton(),
               ],
             ),
           ),
         ),
       );
+
+  Widget buildNoteWidget(BuildContext context) {
+    return NoteFormWidget(
+      number: number,
+      title: title,
+      description: description,
+      noteColor: pickerColor,
+      onChangedColor: (color) => setState(() => pickerColor = color),
+    );
+  }
 
   Widget buildButton() {
     final isFormValid = title.isNotEmpty && description.isNotEmpty;
@@ -124,6 +130,48 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
       ),
     );
   }
+
+  void pickColor(BuildContext context) => showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Pick your color!'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              buildColorPickerBlock(),
+              TextButton(
+                child: Text('SELECT', style: TextStyle(fontSize: 20)),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          ),
+        ),
+      );
+
+  Widget buildColorPickerRGB() => ColorPicker(
+        pickerColor: pickerColor,
+        enableAlpha: false, // hides alpha channel slider
+        labelTypes: [], // hides extra text in color picker like rgb values
+        onColorChanged: (color) => setState(() => pickerColor = color),
+      );
+
+  Widget buildColorPickerBlock() => Flexible(
+        child: BlockPicker(
+          pickerColor: pickerColor,
+          onColorChanged: (color) => setState(() => pickerColor = color),
+          availableColors: [
+            Colors.yellow.shade100,
+            Colors.pink.shade100,
+            Colors.orangeAccent.shade100,
+            Colors.lime.shade300,
+            Colors.green.shade200,
+            Colors.blue.shade200,
+            Colors.indigo.shade100,
+            Colors.deepPurple.shade100,
+            Colors.blueGrey.shade100,
+          ],
+        ),
+      );
 
   // void addOrUpdateNote() async {
   //   final isValid = _formKey.currentState!.validate();
