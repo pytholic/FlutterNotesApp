@@ -56,7 +56,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
                 : lightTheme.appBarTheme.titleTextStyle,
           ),
           centerTitle: true,
-          actions: [buildButton()],
+          //actions: [buildButton()],
         ),
         body: Form(
           key: _formKey,
@@ -64,14 +64,19 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
             width: double.infinity,
             height: double.infinity,
             color: isDark ? Color(0xFF303030) : Color(0xFFf6f5ee),
-            child: NoteFormWidget(
-              number: number,
-              title: title,
-              description: description,
-              // onChangedNumber: (number) => setState(() => this.number = number),
-              // onChangedTitle: (title) => setState(() => this.title = title),
-              // onChangedDescription: (description) =>
-              //     setState(() => this.description = description),
+            child: Column(
+              children: [
+                NoteFormWidget(
+                  number: number,
+                  title: title,
+                  description: description,
+                  // onChangedNumber: (number) => setState(() => this.number = number),
+                  // onChangedTitle: (title) => setState(() => this.title = title),
+                  // onChangedDescription: (description) =>
+                  //     setState(() => this.description = description),
+                ),
+                buildButton(),
+              ],
             ),
           ),
         ),
@@ -81,14 +86,26 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
     final isFormValid = title.isNotEmpty && description.isNotEmpty;
 
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          onPrimary: Colors.white,
-          primary: isFormValid ? null : Colors.grey.shade700,
+      padding: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+      child: SizedBox(
+        width: 110.0,
+        height: 30.0,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            onPrimary: isDark ? Colors.grey[850] : Colors.white,
+            primary: isFormValid
+                ? null
+                : (isDark
+                    ? darkTheme.floatingActionButtonTheme.backgroundColor
+                    : lightTheme.floatingActionButtonTheme.backgroundColor),
+          ),
+          onPressed: () {}, //addOrUpdateNote,
+          child: Text(
+            'Save',
+            style: TextStyle(
+                color: isDark ? Colors.grey[850] : Colors.white, fontSize: 14),
+          ),
         ),
-        onPressed: () {}, //addOrUpdateNote,
-        child: Text('Save'),
       ),
     );
   }
