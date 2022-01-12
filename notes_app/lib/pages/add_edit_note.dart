@@ -56,7 +56,20 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
                 : lightTheme.appBarTheme.titleTextStyle,
           ),
           centerTitle: true,
-          //actions: [buildButton()],
+          actions: <Widget>[
+            Transform.scale(
+              scale: 2,
+              child: IconButton(
+                onPressed: () {},
+                //icon: Icon(Icons.color_lens),
+                icon: Image.asset('./assets/icons/color_picker_icon.png'),
+                color: isDark ? Colors.grey[850] : Colors.white,
+              ),
+            ),
+          ],
+          leading: BackButton(
+            color: isDark ? Colors.grey[850] : Colors.white,
+          ),
         ),
         body: Form(
           key: _formKey,
@@ -89,7 +102,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
       padding: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
       child: SizedBox(
         width: 110.0,
-        height: 30.0,
+        height: 40.0,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             onPrimary: isDark ? Colors.grey[850] : Colors.white,
@@ -102,8 +115,10 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
           onPressed: () {}, //addOrUpdateNote,
           child: Text(
             'Save',
-            style: TextStyle(
-                color: isDark ? Colors.grey[850] : Colors.white, fontSize: 14),
+            style: GoogleFonts.rockSalt(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: isDark ? Colors.grey[850] : Colors.white),
           ),
         ),
       ),

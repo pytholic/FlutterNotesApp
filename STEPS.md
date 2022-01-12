@@ -14,3 +14,5 @@
     * Using light and dark theme data to customize `AppBar` in *Add Note* page. Also added title text in add note page.
     * Passing same `ThemeData` variables (*lightTheme, darTheme*) from **Main Page** to **Add Edit Page** to customize app bar. 
     * Customized `Save` button theme and dimensions with `ThemeData`.
+    * Customized *Back* button `<-` color in the *Add Note* page.
+    * Added `Color Pick` icon (*rainbow*) in the app bar on *Add Page*. Will replace **Pick Color** button with this icon.

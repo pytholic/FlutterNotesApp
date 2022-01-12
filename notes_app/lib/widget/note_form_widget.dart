@@ -50,17 +50,17 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
               // Padding to add space between widgets, we can also use SizedBox
               Padding(padding: EdgeInsets.only(top: 30.0)),
               buildDescription(),
-              Padding(padding: EdgeInsets.only(top: 30.0)),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 24),
-                ),
-                child: Text(
-                  'Pick Color',
-                  style: TextStyle(fontSize: 24),
-                ),
-                onPressed: () => pickColor(context),
-              ),
+              // Padding(padding: EdgeInsets.only(top: 30.0)),
+              // ElevatedButton(
+              //   style: ElevatedButton.styleFrom(
+              //     padding: EdgeInsets.symmetric(horizontal: 24),
+              //   ),
+              //   child: Text(
+              //     'Pick Color',
+              //     style: TextStyle(fontSize: 24),
+              //   ),
+              //   onPressed: () => pickColor(context),
+              // ),
             ],
           ),
         ),
