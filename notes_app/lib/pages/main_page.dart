@@ -12,7 +12,7 @@ class MainPageState extends State<MainPage> {
   bool isDark = true;
   static const String title = 'My Notes';
 
-  static ThemeData? lightTheme = ThemeData(
+  static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     scaffoldBackgroundColor: Color(0xFFf6f5ee),
     floatingActionButtonTheme:
@@ -25,7 +25,7 @@ class MainPageState extends State<MainPage> {
     ),
   );
 
-  static ThemeData? darkTheme = ThemeData(
+  static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     scaffoldBackgroundColor: Colors.grey[850],
     floatingActionButtonTheme:
@@ -65,7 +65,10 @@ class MainPageState extends State<MainPage> {
             onPressed: () async {
               await Navigator.of(context).push(
                 MaterialPageRoute(
-                    builder: (context) => AddEditNotePage(isDark: isDark)),
+                    builder: (context) => AddEditNotePage(
+                        isDark: isDark,
+                        lightTheme: lightTheme,
+                        darkTheme: darkTheme)),
               );
             },
             child: Icon(Icons.add,

@@ -7,14 +7,19 @@ import 'package:google_fonts/google_fonts.dart';
 class AddEditNotePage extends StatefulWidget {
   final Note? note;
   bool isDark;
+  ThemeData lightTheme;
+  ThemeData darkTheme;
 
   AddEditNotePage({
     Key? key,
     this.note,
     required this.isDark,
+    required this.lightTheme,
+    required this.darkTheme,
   }) : super(key: key);
   @override
-  _AddEditNotePageState createState() => _AddEditNotePageState(isDark);
+  _AddEditNotePageState createState() =>
+      _AddEditNotePageState(isDark, lightTheme, darkTheme);
 }
 
 class _AddEditNotePageState extends State<AddEditNotePage> {
@@ -23,8 +28,10 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
   late String title;
   late String description;
   bool isDark;
+  ThemeData lightTheme;
+  ThemeData darkTheme;
 
-  _AddEditNotePageState(this.isDark);
+  _AddEditNotePageState(this.isDark, this.lightTheme, this.darkTheme);
 
   @override
   void initState() {
@@ -36,43 +43,17 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
     isDark = isDark;
   }
 
-  static ThemeData? lightTheme = ThemeData(
-    brightness: Brightness.light,
-    scaffoldBackgroundColor: Color(0xFFf6f5ee),
-    floatingActionButtonTheme:
-        FloatingActionButtonThemeData(backgroundColor: Colors.teal[300]),
-    appBarTheme: AppBarTheme(
-      backgroundColor: Colors.teal[300],
-      titleTextStyle:
-          GoogleFonts.rockSalt(fontSize: 20, fontWeight: FontWeight.bold),
-      elevation: 4.0,
-    ),
-  );
-
-  static ThemeData? darkTheme = ThemeData(
-    brightness: Brightness.dark,
-    scaffoldBackgroundColor: Colors.grey[850],
-    floatingActionButtonTheme:
-        FloatingActionButtonThemeData(backgroundColor: Colors.amber[600]),
-    appBarTheme: AppBarTheme(
-      backgroundColor: Colors.amber[600],
-      titleTextStyle: GoogleFonts.rockSalt(
-          fontSize: 20, fontWeight: FontWeight.bold, color: Colors.grey[850]),
-      elevation: 4.0,
-    ),
-  );
-
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           backgroundColor: isDark
-              ? darkTheme?.appBarTheme.backgroundColor
-              : lightTheme?.appBarTheme.backgroundColor,
+              ? darkTheme.appBarTheme.backgroundColor
+              : lightTheme.appBarTheme.backgroundColor,
           title: Text(
             'Add/Edit Note',
             style: isDark
-                ? darkTheme?.appBarTheme.titleTextStyle
-                : lightTheme?.appBarTheme.titleTextStyle,
+                ? darkTheme.appBarTheme.titleTextStyle
+                : lightTheme.appBarTheme.titleTextStyle,
           ),
           centerTitle: true,
           actions: [buildButton()],

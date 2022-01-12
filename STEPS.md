@@ -10,3 +10,6 @@
     * Wrapped *title* and *description* fields in `Row()` to add `padding` on the left side.
     * Selecting font style for *title* and *description* text.
     * Passing `isDark` variable from **Main** page to *Add/Edit* page. Pass variable from main page using navigator route and then assign it to new defined variables in the next page. More code detail in `add_edit_note.dart`. Also this [answer](https://stackoverflow.com/a/56744625) helped a lot.)
+    * Creating variables for light and dark theme data
+    * Using light and dark theme data to customize `AppBar` in *Add Note* page. Also added title text in add note page.
+    * Passing same `ThemeData` variables (*lightTheme, darTheme*) from **Main Page** to **Add Edit Page** to customize app bar. 
