@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 //import 'package:notes_app/db/notes_database.dart';
 import 'package:notes_app/model/note.dart';
 import 'package:notes_app/widget/note_form_widget.dart';
-import 'package:notes_app/pages/main_page.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AddEditNotePage extends StatefulWidget {
   final Note? note;
@@ -14,7 +14,7 @@ class AddEditNotePage extends StatefulWidget {
     required this.isDark,
   }) : super(key: key);
   @override
-  _AddEditNotePageState createState() => _AddEditNotePageState(this.isDark);
+  _AddEditNotePageState createState() => _AddEditNotePageState(isDark);
 }
 
 class _AddEditNotePageState extends State<AddEditNotePage> {
@@ -36,9 +36,45 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
     isDark = isDark;
   }
 
+  static ThemeData? lightTheme = ThemeData(
+    brightness: Brightness.light,
+    scaffoldBackgroundColor: Color(0xFFf6f5ee),
+    floatingActionButtonTheme:
+        FloatingActionButtonThemeData(backgroundColor: Colors.teal[300]),
+    appBarTheme: AppBarTheme(
+      backgroundColor: Colors.teal[300],
+      titleTextStyle:
+          GoogleFonts.rockSalt(fontSize: 20, fontWeight: FontWeight.bold),
+      elevation: 4.0,
+    ),
+  );
+
+  static ThemeData? darkTheme = ThemeData(
+    brightness: Brightness.dark,
+    scaffoldBackgroundColor: Colors.grey[850],
+    floatingActionButtonTheme:
+        FloatingActionButtonThemeData(backgroundColor: Colors.amber[600]),
+    appBarTheme: AppBarTheme(
+      backgroundColor: Colors.amber[600],
+      titleTextStyle: GoogleFonts.rockSalt(
+          fontSize: 20, fontWeight: FontWeight.bold, color: Colors.grey[850]),
+      elevation: 4.0,
+    ),
+  );
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
+          backgroundColor: isDark
+              ? darkTheme?.appBarTheme.backgroundColor
+              : lightTheme?.appBarTheme.backgroundColor,
+          title: Text(
+            'Add/Edit Note',
+            style: isDark
+                ? darkTheme?.appBarTheme.titleTextStyle
+                : lightTheme?.appBarTheme.titleTextStyle,
+          ),
+          centerTitle: true,
           actions: [buildButton()],
         ),
         body: Form(

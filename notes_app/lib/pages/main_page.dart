@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:notes_app/pages/add_edit_note.dart';
-import 'package:notes_app/widget/note_form_widget.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -13,40 +12,40 @@ class MainPageState extends State<MainPage> {
   bool isDark = true;
   static const String title = 'My Notes';
 
+  static ThemeData? lightTheme = ThemeData(
+    brightness: Brightness.light,
+    scaffoldBackgroundColor: Color(0xFFf6f5ee),
+    floatingActionButtonTheme:
+        FloatingActionButtonThemeData(backgroundColor: Colors.teal[300]),
+    appBarTheme: AppBarTheme(
+      backgroundColor: Colors.teal[300],
+      titleTextStyle:
+          GoogleFonts.rockSalt(fontSize: 20, fontWeight: FontWeight.bold),
+      elevation: 4.0,
+    ),
+  );
+
+  static ThemeData? darkTheme = ThemeData(
+    brightness: Brightness.dark,
+    scaffoldBackgroundColor: Colors.grey[850],
+    floatingActionButtonTheme:
+        FloatingActionButtonThemeData(backgroundColor: Colors.amber[600]),
+    appBarTheme: AppBarTheme(
+      backgroundColor: Colors.amber[600],
+      titleTextStyle: GoogleFonts.rockSalt(
+          fontSize: 20, fontWeight: FontWeight.bold, color: Colors.grey[850]),
+      elevation: 4.0,
+    ),
+  );
+
   @override
   Widget build(BuildContext context) => MaterialApp(
         debugShowCheckedModeBanner: false,
 
         // Define light theme data
-        theme: ThemeData(
-          brightness: Brightness.light,
-          scaffoldBackgroundColor: Color(0xFFf6f5ee),
-          floatingActionButtonTheme:
-              FloatingActionButtonThemeData(backgroundColor: Colors.teal[300]),
-          appBarTheme: AppBarTheme(
-            backgroundColor: Colors.teal[300],
-            titleTextStyle:
-                GoogleFonts.rockSalt(fontSize: 20, fontWeight: FontWeight.bold),
-            elevation: 4.0,
-          ),
-        ),
-
+        theme: lightTheme,
         // Define dark theme data
-        darkTheme: ThemeData(
-          brightness: Brightness.dark,
-          scaffoldBackgroundColor: Colors.grey[850],
-          floatingActionButtonTheme:
-              FloatingActionButtonThemeData(backgroundColor: Colors.amber[600]),
-          appBarTheme: AppBarTheme(
-            backgroundColor: Colors.amber[600],
-            titleTextStyle: GoogleFonts.rockSalt(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey[850]),
-            elevation: 4.0,
-          ),
-        ),
-
+        darkTheme: darkTheme,
         themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
         home: Scaffold(
           appBar: AppBar(
@@ -69,7 +68,8 @@ class MainPageState extends State<MainPage> {
                     builder: (context) => AddEditNotePage(isDark: isDark)),
               );
             },
-            child: Icon(Icons.add),
+            child: Icon(Icons.add,
+                color: isDark ? Colors.grey[850] : Colors.white),
           ),
         ),
       );

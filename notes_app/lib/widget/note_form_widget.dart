@@ -1,11 +1,6 @@
-import 'dart:ui';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:notes_app/model/note.dart';
-import 'package:notes_app/widget/note_form_widget.dart';
-import 'package:notes_app/pages/main_page.dart';
 
 Color pickerColor = Colors.pink.shade100;
 
