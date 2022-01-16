@@ -10,17 +10,18 @@ class AddEditNotePage extends StatefulWidget {
   final bool isDark;
   final ThemeData lightTheme;
   final ThemeData darkTheme;
+  Color pickerColor;
 
-  const AddEditNotePage({
+  AddEditNotePage({
     Key? key,
     this.note,
     required this.isDark,
     required this.lightTheme,
     required this.darkTheme,
+    required this.pickerColor,
   }) : super(key: key);
   @override
-  _AddEditNotePageState createState() =>
-      _AddEditNotePageState(isDark, lightTheme, darkTheme);
+  _AddEditNotePageState createState() => _AddEditNotePageState();
 }
 
 class _AddEditNotePageState extends State<AddEditNotePage> {
@@ -29,11 +30,10 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
   late String title;
   late String description;
   late Color pickerColor;
-  bool isDark;
-  ThemeData lightTheme;
-  ThemeData darkTheme;
-
-  _AddEditNotePageState(this.isDark, this.lightTheme, this.darkTheme);
+  late bool isDark;
+  late ThemeData lightTheme;
+  late ThemeData darkTheme;
+  //_AddEditNotePageState(this.isDark, this.lightTheme, this.darkTheme);
 
   @override
   void initState() {
@@ -42,8 +42,10 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
     number = widget.note?.number ?? 0;
     title = widget.note?.title ?? '';
     description = widget.note?.description ?? '';
-    isDark = isDark;
-    pickerColor = Colors.yellow.shade100;
+    isDark = widget.isDark;
+    lightTheme = widget.lightTheme;
+    darkTheme = widget.darkTheme;
+    pickerColor = widget.pickerColor;
   }
 
   @override
@@ -63,7 +65,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
             Transform.scale(
               scale: 2,
               child: IconButton(
-                onPressed: () => pickColor(context),
+                onPressed: () => pickColor(),
                 //icon: Icon(Icons.color_lens),
                 icon: Image.asset('./assets/icons/color_picker_icon.png'),
                 color: isDark ? Colors.grey[850] : Colors.white,
@@ -83,7 +85,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
             color: isDark ? Color(0xFF303030) : Color(0xFFf6f5ee),
             child: Column(
               children: [
-                buildNoteWidget(context),
+                buildNoteWidget(),
                 buildButton(),
               ],
             ),
@@ -91,13 +93,12 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
         ),
       );
 
-  Widget buildNoteWidget(BuildContext context) {
+  Widget buildNoteWidget() {
     return NoteFormWidget(
       number: number,
       title: title,
       description: description,
       noteColor: pickerColor,
-      onChangedColor: (color) => setState(() => pickerColor = color),
     );
   }
 
@@ -131,7 +132,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
     );
   }
 
-  void pickColor(BuildContext context) => showDialog(
+  void pickColor() => showDialog(
         context: context,
         builder: (context) => AlertDialog(
           title: Text('Pick your color!'),
@@ -141,7 +142,10 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
               buildColorPickerBlock(),
               TextButton(
                 child: Text('SELECT', style: TextStyle(fontSize: 20)),
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  //print('$pickerColor');
+                },
               ),
             ],
           ),
@@ -152,13 +156,17 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
         pickerColor: pickerColor,
         enableAlpha: false, // hides alpha channel slider
         labelTypes: [], // hides extra text in color picker like rgb values
-        onColorChanged: (color) => setState(() => pickerColor = color),
+        onColorChanged: (color) => setState(() {
+          pickerColor = color;
+        }),
       );
 
   Widget buildColorPickerBlock() => Flexible(
         child: BlockPicker(
           pickerColor: pickerColor,
-          onColorChanged: (color) => setState(() => pickerColor = color),
+          onColorChanged: (color) => setState(() {
+            pickerColor = color;
+          }),
           availableColors: [
             Colors.yellow.shade100,
             Colors.pink.shade100,

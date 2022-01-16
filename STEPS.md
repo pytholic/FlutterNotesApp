@@ -16,3 +16,8 @@
     * Customized `Save` button theme and dimensions with `ThemeData`.
     * Customized *Back* button `<-` color in the *Add Note* page.
     * Added `Color Pick` icon (*rainbow*) in the app bar on *Add Page*. Will replace **Pick Color** button with this icon.
+
+# Issues
+* Changing *Note Form* widget color from `color pick` icon in *App Bar*
+    * Spent a lot of time to set state and pass values
+    * In the end changing `Material` color of *Tiele* and *Description* fields from `color: notecolor` to `color.widget.notecolor` fixed the issue.

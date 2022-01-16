@@ -8,8 +8,9 @@ class NoteFormWidget extends StatefulWidget {
   final String title;
   final String description;
   final int? number;
-  Color noteColor;
-  final ValueChanged<Color> onChangedColor;
+  final Color noteColor;
+  //final Function callback;
+
   //final ValueChanged<String> onChangedTitle;
   //final ValueChanged<String> onChangedDescription;
 
@@ -19,14 +20,14 @@ class NoteFormWidget extends StatefulWidget {
     this.description = '',
     this.number = 0,
     required this.noteColor,
-    required this.onChangedColor,
+    //required this.callback,
+
     //required this.onChangedTitle,
     //required this.onChangedDescription,
   }) : super(key: key);
 
   @override
-  _NoteFormWidgetState createState() =>
-      _NoteFormWidgetState(noteColor, onChangedColor);
+  _NoteFormWidgetState createState() => _NoteFormWidgetState();
 }
 
 class _NoteFormWidgetState extends State<NoteFormWidget> {
@@ -35,9 +36,7 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
   late String description;
   late int number;
   late Color noteColor;
-  late ValueChanged<Color> onChangedColor;
-
-  _NoteFormWidgetState(this.noteColor, this.onChangedColor);
+  //late final Function callback;
 
   @override
   void initState() {
@@ -45,7 +44,9 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
     number = 0;
     title = '';
     description = '';
-    //noteColor = noteColor;
+    noteColor = widget.noteColor;
+    //callback = callback(noteColor);
+    //print(widget.noteColor);
   }
 
   @override
@@ -56,10 +57,10 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Padding(padding: EdgeInsets.only(top: 20.0)),
-              buildTitle(noteColor),
+              buildTitle(),
               // Padding to add space between widgets, we can also use SizedBox
               Padding(padding: EdgeInsets.only(top: 30.0)),
-              buildDescription(noteColor),
+              buildDescription(),
               // Padding(padding: EdgeInsets.only(top: 30.0)),
               // ElevatedButton(
               //   style: ElevatedButton.styleFrom(
@@ -76,9 +77,9 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
         ),
       );
 
-  Widget buildTitle(Color color) => Material(
+  Widget buildTitle() => Material(
         borderRadius: BorderRadius.circular(10),
-        color: color,
+        color: widget.noteColor, // set color same as pickerColor
         // Wrap inside Row to add Padding on the left side
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -111,9 +112,9 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
         ),
       );
 
-  Widget buildDescription(Color color) => Material(
+  Widget buildDescription() => Material(
         borderRadius: BorderRadius.circular(10),
-        color: color,
+        color: widget.noteColor,
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [

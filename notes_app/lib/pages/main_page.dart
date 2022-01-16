@@ -65,10 +65,13 @@ class MainPageState extends State<MainPage> {
             onPressed: () async {
               await Navigator.of(context).push(
                 MaterialPageRoute(
-                    builder: (context) => AddEditNotePage(
-                        isDark: isDark,
-                        lightTheme: lightTheme,
-                        darkTheme: darkTheme)),
+                  builder: (context) => AddEditNotePage(
+                    isDark: isDark,
+                    lightTheme: lightTheme,
+                    darkTheme: darkTheme,
+                    pickerColor: Colors.yellow.shade100,
+                  ),
+                ),
               );
             },
             child: Icon(Icons.add,
