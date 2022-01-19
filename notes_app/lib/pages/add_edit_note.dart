@@ -168,15 +168,15 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
             pickerColor = color;
           }),
           availableColors: [
-            Colors.yellow.shade100,
+            Colors.yellow.shade200,
             Colors.pink.shade100,
             Colors.orangeAccent.shade100,
             Colors.lime.shade300,
             Colors.green.shade200,
             Colors.blue.shade200,
             Colors.indigo.shade100,
-            Colors.deepPurple.shade100,
-            Colors.blueGrey.shade100,
+            Colors.purple.shade100,
+            Colors.blueGrey.shade200,
           ],
         ),
       );

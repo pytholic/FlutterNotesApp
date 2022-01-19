@@ -61,17 +61,6 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
               // Padding to add space between widgets, we can also use SizedBox
               Padding(padding: EdgeInsets.only(top: 30.0)),
               buildDescription(),
-              // Padding(padding: EdgeInsets.only(top: 30.0)),
-              // ElevatedButton(
-              //   style: ElevatedButton.styleFrom(
-              //     padding: EdgeInsets.symmetric(horizontal: 24),
-              //   ),
-              //   child: Text(
-              //     'Pick Color',
-              //     style: TextStyle(fontSize: 24),
-              //   ),
-              //   onPressed: () => pickColor(context),
-              // ),
             ],
           ),
         ),
@@ -87,18 +76,19 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
             Padding(padding: EdgeInsets.only(left: 10.0)),
             Expanded(
               child: TextFormField(
-                inputFormatters: [UpperCaseTextFormatter()],
+                //sfagfafinputFormatters: [UpperCaseTextFormatter()],
                 maxLines: 1,
-                initialValue: title.toUpperCase(),
-                style: GoogleFonts.justAnotherHand(
-                    fontSize: 32,
+                initialValue: title, //.toUpperCase(),
+                style: GoogleFonts.shadowsIntoLightTwo(
+                    //justAnotherHand
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: Colors.grey[800]),
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: 'Title'.toUpperCase(),
-                  hintStyle: GoogleFonts.justAnotherHand(
-                      fontSize: 32,
+                  hintText: 'Title', //.toUpperCase(),
+                  hintStyle: GoogleFonts.shadowsIntoLightTwo(
+                      fontSize: 24,
                       fontWeight: FontWeight.normal,
                       color: Colors.grey[500]),
                 ),
@@ -124,14 +114,14 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
                 maxLines: 5,
                 initialValue: description,
                 style: GoogleFonts.shadowsIntoLightTwo(
-                    fontSize: 20,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.grey[700]),
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Type something...',
                   hintStyle: GoogleFonts.shadowsIntoLightTwo(
-                      fontSize: 20,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Colors.grey[500]),
                 ),
@@ -160,28 +150,5 @@ class _NoteFormWidgetState extends State<NoteFormWidget> {
   //           ],
   //         ),
   //       ),
-  //     );
-
-  // Widget buildColorPickerRGB() => ColorPicker(
-  //       pickerColor: pickerColor,
-  //       enableAlpha: false, // hides alpha channel slider
-  //       labelTypes: [], // hides extra text in color picker like rgb values
-  //       onColorChanged: (color) => setState(() => pickerColor = color),
-  //     );
-
-  // Widget buildColorPickerBlock() => BlockPicker(
-  //       pickerColor: pickerColor,
-  //       onColorChanged: (color) => setState(() => pickerColor = color),
-  //       availableColors: [
-  //         Colors.yellow.shade100,
-  //         Colors.pink.shade100,
-  //         Colors.orangeAccent.shade100,
-  //         Colors.lime.shade300,
-  //         Colors.green.shade200,
-  //         Colors.blue.shade200,
-  //         Colors.indigo.shade100,
-  //         Colors.deepPurple.shade100,
-  //         Colors.blueGrey.shade100,
-  //       ],
   //     );
 }
